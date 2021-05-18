@@ -1,12 +1,32 @@
 .border{
     border:3px black solid;
-    width: 180px;
+    width: 315px;
     display: none;
-}   
+}
 
 .text{
     font-size: large;
     height: 90px;
     resize: none;
     display: none;
+}
+
+#but{
+    height: 50px;
+    width: 120px;
+    background-color: green;
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    box-shadow: black 3px;
+    border-radius: 25px;
+
+}
+#but:hover{
+    cursor: pointer;
+    border-color: chartreuse;
+}
+
+#wa{
+    color: crimson;
 }

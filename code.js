@@ -16,11 +16,31 @@ var speed=()=>{
     let text=document.getElementById('text');
     let wa=document.getElementById('wa');
     let but=document.getElementById('but');
+    let chromo=document.getElementById('chromo');
     border.style.display="block";
     text.style.display="block";
     wa.style.display="none";
     but.style.display="none";
-setTimeout(function(){
+    seconds=0;
+    var myfunc = setInterval(()=> {
+        seconds++;
+        chromo.innerHTML=seconds;
+        if (seconds>5){
+            clear();
+            chromo.innerHTML="";
+            text.select();
+        }if (seconds==5){
+            chromo.innerHTML="GO";
+        }
+
+        }, 1000)
+
+    var clear=()=>{ 
+        clearInterval(myfunc);
+    }
+
+
+setTimeout(()=>{
     pars=[par1,par2];
     
     par=pars[Math.floor(Math.random()*2)];
@@ -43,37 +63,44 @@ let w=0;
 let tens=0;
 let seconds=0;
 let minutes=0;
-
+let correct_entries=0;
 let game=()=>{
 
 
     let text=document.getElementById('text').value;
     let wa=document.getElementById('par').value;
+    let chromo=document.getElementById('chromo');
+    let len=wa.length
     if(text.charAt(t)==wa.charAt(w)){
-        w+=1;
-        t+=1;
+        w++;
+        t++;
+        correct_entries++;
         document.getElementById('text').style.backgroundColor="white";
     }else if(t==wa.length){
         alert("Done");
+        alert("Your accuracy is "+Math.floor((correct_entries/len)*100) +"%")
+        let WPM=Math.floor((text.length/5)/(seconds/60));
+        alert("You type "+ WPM  + "WPM")
 
     }else if(text.charAt(t)!=wa.charAt(w)){
         document.getElementById('text').style.backgroundColor="red";
+        correct_entries--;
     }
 
-
-
-}
-
-
-clicked=false;
-let chronoo=()=>{
-    let chro=document.getElementById("chromo");
-    clicked=true;
-    if (clicked){
-    tens++
-    if (tens>90){
+    var counting= setInterval(()=>{
         seconds++;
+        chromo.innerHTML=seconds+"s";   
+        if(t==wa.length){
+            clear();
+        };
+
+    }, 1000)
+
+    var clear=()=>{ 
+        clearInterval(counting);
     }
-    chro.innerHTML=tens+" "+seconds;
+
 }
-}
+
+
+
