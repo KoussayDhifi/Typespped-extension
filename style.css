@@ -1,0 +1,12 @@
+.border{
+    border:3px black solid;
+    width: 180px;
+    display: none;
+}   
+
+.text{
+    font-size: large;
+    height: 90px;
+    resize: none;
+    display: none;
+}
