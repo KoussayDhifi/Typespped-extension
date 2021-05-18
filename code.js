@@ -1,12 +1,10 @@
-var par1={name:"par1",
-    content:"The Moon is a barren,rocky world without air and water. It has dark lava plain on its surface. The Moon is filled wit craters. It has no light of its own. It gets its light from the Sun. The Moo keeps changing its shape as it moves round the Earth."};
-
-var par2={name:"par2",content:"The sun is a huge ball of gases. It has a diameter of 1,392,000 km. It is so huge that it can hold millions of planets inside it. The Sun is mainly made up of hydrogen and helium gas. The surface of the Sun is known as the photosphere. The photosphere is surrounded by a thin layer of gas known as the chromospheres."};
+var pars=["A paragraph contains a group of sentences intertwined with each other to discuss, or debate, or explain a central idea. It conventionally begins with an indented line. A beginner writer or a student usually starts writing a paragraph having seven sentences, while some professors of composition advise beginners to start with nine sentences, and some others ask them to start with eleven sentences.","Canadaisoneofthebestcountriesintheworldtolivein.First,Canadahasanexcellenthealthcaresystem.AllCanadianshaveaccesstomedicalservicesatareasonableprice.Second,Canadahasahighstandardofeducation.Studentsaretaughtbywell‐trainedteachersandareencouragedtocontinuestudyingatuniversity.Finally,Canada'scitiesarecleanandefficientlymanaged.Canadiancitieshavemanyparksandlotsofspaceforpeopletolive.Asaresult,Canadaisadesirableplacetolive.","AlexandertheGreatwasasuccessfulrulerbecausehisactionscreatedlonglastingeffectsonculturesthatcontinuetothepresentday.OneexampleofhislegacywasthecreationofaHellenisticsociety.HellenismwasthecombinationofGreek,Persian,andEgyptiancultures.Duringthisremarkabletimeperiod,peoplewereencouragedtopursueaformaleducationandproducemanydifferentkindsofart.","Examples#3‐4Magellan’scircumnavigation[oftheglobe]foreveralteredtheWesternworld’sideasaboutcosmology–thestudyoftheuniverseandourplaceinit–aswellasgeography.Itdemonstrated,amongotherthings,thattheearthwasround,thattheAmericaswerenotpartofIndiabutwereactuallyaseparatecontinent,andthatoceanscoveredmostoftheearth’ssurface.Thevoyageconclusivelydemonstratedthattheearthis,afterall,oneworld.Butitalsodemonstratedthatitwasaworldofunceasingconflict,bothnaturalandhuman.","DuringtheCivilWareramanyfactionssoughttochangeAmerica.Remarkablespeakersspreadtheirideasthroughoratory,thrillingtheiraudiencesthroughpowerfulspeechesthatappealedtobothemotionandlogic.FrederickDouglass,ablackAmerican,foughtforblackcivilrightsthroughcompellingspeecheslike“WhattotheslaveistheFourthofJuly?”whichdepictedtheterrorsofslaveryingraphicdetail.","Although all seasons have their good points, there are several aspects of summer that  make  it  my  favorite. First  of  all,  summer  allows  for  more  outdoor  activities. The warm  weather lets mespend  more  time  outsidedoing  the  things  I  love,  such  as  playing my favorite outdoor sports, meetingwith friends, or just walking around different parts of the  city. Additionally,  more  fun  events  are  held  during  the  summer,  such  as  outdoor concerts  and  various  festivals. "]
 
 
 
 
 
+var seconds=0;
 
 
 var speed=()=>{
@@ -21,15 +19,15 @@ var speed=()=>{
     text.style.display="block";
     wa.style.display="none";
     but.style.display="none";
-    seconds=0;
+    seconds1=0;
     var myfunc = setInterval(()=> {
-        seconds++;
-        chromo.innerHTML=seconds;
-        if (seconds>5){
-            clear();
-            chromo.innerHTML="";
-            text.select();
-        }if (seconds==5){
+        seconds1++;
+        chromo.innerHTML=seconds1;
+        if (seconds1>5){
+            seconds++
+            chromo.innerHTML=seconds;
+            text.focus();
+        }if (seconds1==5){
             chromo.innerHTML="GO";
         }
 
@@ -41,13 +39,13 @@ var speed=()=>{
 
 
 setTimeout(()=>{
-    pars=[par1,par2];
     
-    par=pars[Math.floor(Math.random()*2)];
+    
+    par=pars[Math.floor(Math.random()*4)];
     
     cont=document.getElementById("par");
-    cont.innerHTML=par.content;
-    cont.value=par.content;
+    cont.innerHTML=par;
+    cont.value=par;
     globalThis 
     
     }, 6000);
@@ -61,7 +59,6 @@ setTimeout(()=>{
 let t=0;
 let w=0;
 let tens=0;
-let seconds=0;
 let minutes=0;
 let correct_entries=0;
 let game=()=>{
@@ -87,20 +84,6 @@ let game=()=>{
         correct_entries--;
     }
 
-    var counting= setInterval(()=>{
-        seconds++;
-        chromo.innerHTML=seconds+"s";   
-        if(t==wa.length){
-            clear();
-        };
 
-    }, 1000)
-
-    var clear=()=>{ 
-        clearInterval(counting);
-    }
 
 }
-
-
-
