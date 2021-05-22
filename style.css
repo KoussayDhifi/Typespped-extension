@@ -39,3 +39,30 @@ h1{
     font-size: 500%;
     
 }
+#settings:hover{
+    cursor: pointer;
+}
+
+.type{
+    display: none;
+}
+
+label{
+    display: none;
+    width: 220px;
+}
+#r{
+    display: none;
+}
+#b{
+    display: none;
+}
+.line{
+    display: none;
+}
+#support{
+    display: none;
+}
+input[type=color]{
+    display: none;
+}
