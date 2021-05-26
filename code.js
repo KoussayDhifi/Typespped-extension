@@ -65,8 +65,8 @@ pars=[
 var cont=document.getElementById("par");
 var paras;
 var seconds=0;
-let t=0;
-let w=0;
+var t;
+var w;
 let tens=0;
 let minutes=0;
 let correct_entries=0;
@@ -74,10 +74,11 @@ var options=false;
 var correct1='green';
 var error1='red';
 var but=document.getElementById("but");
+var WPM;
 window.onload = function(){
     document.getElementById("but").onclick=function(){
-
-
+    w=0;
+    t=0;
     let border=document.getElementById('border');
     let text=document.getElementById('text');
     let wa=document.getElementById('wa');
@@ -89,6 +90,24 @@ window.onload = function(){
     wa.style.display="none";
     but.style.display="none";
     seconds1=0;
+    setTimeout(()=>{
+        let text=document.getElementById('text');
+        
+        par=pars[Math.floor(Math.random()*55)];
+        
+        cont.innerHTML=par;
+        cont.value=par;
+        paras=cont.innerHTML;
+        let settings=document.getElementById('settings');
+        settings.style.display='none';
+        text.readOnly=false;
+        }, 6000);
+
+
+
+
+
+
     var myfunc = setInterval(()=> {
         seconds1++;
         counting.innerHTML=seconds1;
@@ -99,35 +118,40 @@ window.onload = function(){
             text.style.display='block';
             wa.style.display='block';
             border.style.display='block';
-            seconds++
+            seconds++;
+            chromo.style.display='block';   
             chromo.innerHTML=seconds;
             counting.style.display='none'
 
             text.focus();
-        }if (seconds1==5){
+
+
+        }else if (seconds1==5){
             counting.innerHTML="GO";
             
         }
 
-        }, 1000)
+        try {
+            if(t==cont.value.length){
+                clear();
+                seconds=0;
+                seconds1=0;
+
+            }
+
+
+        }
+        catch(e){
+
+        }
+}, 1000)
 
     var clear=()=>{ 
         clearInterval(myfunc);
     }
 
 
-setTimeout(()=>{
-    let text=document.getElementById('text');
-    
-    par=pars[Math.floor(Math.random()*55)];
-    
-    cont.innerHTML=par;
-    cont.value=par;
-    paras=cont.innerHTML;
-    let settings=document.getElementById('settings');
-    settings.style.display='none';
-    text.readOnly=false;
-    }, 6000);
+myfunc();
 
 
 
@@ -136,43 +160,48 @@ setTimeout(()=>{
 }
 
 
-
 document.getElementById("text").oninput=function(){
     let text=document.getElementById('text');
     let chromo=document.getElementById('chromo');
     let len=cont.value.length;
-    let third=""
-    if(text.value.charAt(t)==cont.value.charAt(w)){
+    let third="";
+    if((text.value.charAt(t)==cont.value.charAt(w))&&(w-1!=cont.value.length)){
+        /*if(text.value.charAt(t)==" "){
+            text.value=""
+        }*/
+        if(w<cont.value.length){
 
-        third+=paras.substr(0,w+1)+'<span style=background-color:'+ correct1 +'>'+cont.value[w+1]+'</span>'+paras.substr(w+2,paras.length)
+            third+=paras.substr(0,w+1)+'<span style=background-color:'+ correct1 +'>'+cont.value[w+1]+'</span>'+paras.substr(w+2,paras.length)
+            }
 
         w++;
         t++;
         correct_entries++;
         document.getElementById('text').style.backgroundColor="white";
-        cont.innerHTML=third
-    }else if(t==cont.value.length){
-        let WPM=Math.floor((text.value.length/5)/(seconds/60));
-        text.value='';
-        text.readOnly=true;
-        chromo.style.display='none';
-        cont.innerHTML="Your accuracy is "+Math.floor((correct_entries/len)*100) +"%"+"<br>"+"You type "+ WPM  + "WPM";       
-        but.style.display='block';
-        w=0;
-        t=0;
-        correct_entries=0;  
-    }else if(text.value.charAt(t)!=cont.value.charAt(w)){
+        cont.innerHTML=third;
+        }else if((text.value.charAt(t)!=cont.value.charAt(w)&&(w != cont.value.length))){
         document.getElementById('text').style.backgroundColor=error1;
         if (w<paras.length){
         third+=paras.substr(0,w)+'<span style=background-color:'+error1+'>'+cont.value[w]+'</span>'+paras.substr(w+1,paras.length)
         }
 
 
-
         cont.innerHTML=third
 
         correct_entries--;
+    }if(w==cont.value.length){
+        cont.innerHTML=paras.substr(0,w);
+        WPM=Math.floor((len/5)/(seconds/60));
+        console.log(len)
+        console.log(seconds)
+        text.value='';
+        text.readOnly=true;
+        chromo.style.display='none';
+        cont.innerHTML="Your accuracy is "+Math.floor((correct_entries/len)*100) +"%"+"<br>"+"You type "+ WPM  + "WPM";       
+        but.style.display='block';
+        correct_entries=0;  
     }
+
 
 }
 
