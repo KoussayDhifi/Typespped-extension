@@ -75,6 +75,8 @@ var correct1='green';
 var error1='red';
 var but=document.getElementById("but");
 var WPM;
+var body=document.getElementsByTagName("body");
+var back;
 window.onload = function(){
     document.getElementById("but").onclick=function(){
     w=0;
@@ -98,6 +100,7 @@ window.onload = function(){
         cont.innerHTML=par;
         cont.value=par;
         paras=cont.innerHTML;
+        cont.innerHTML='<span style=background-color:'+correct1+'>'+cont.value[0]+'</span>'+cont.value.substr(1,cont.value.length)
         let settings=document.getElementById('settings');
         settings.style.display='none';
         text.readOnly=false;
@@ -215,6 +218,13 @@ document.getElementById("settings").onclick=function(){
     let types=document.getElementsByClassName('label');
     correct1=document.getElementById('correct').value;
     error1=document.getElementById('error').value;
+    back=document.getElementById("back").value;
+    let back1=document.getElementById("back");
+    chrome.storage.sync.set({
+        correctColor:correct1,
+        mistakeColor:error1
+    })
+
     let correct=document.getElementById('correct');
     let error=document.getElementById('error');
 
@@ -224,7 +234,8 @@ document.getElementById("settings").onclick=function(){
     support.style.display='block';
     correct.style.display='inline-block';
     error.style.display='inline-block';
-        for (let i=0;i<2;i++){
+    back1.style.display='inline-block';
+        for (let i=0;i<3;i++){
             types[i].style.display='block'  
         }
 
@@ -236,12 +247,18 @@ document.getElementById("settings").onclick=function(){
     support.style.display='none';
     correct.style.display='none';
     error.style.display='none';
-        for (let i=0;i<2;i++){
+    back1.style.display='none';
+        for (let i=0;i<3;i++){
             types[i].style.display='none'  
         }
 
    
     options=false;
+}
+
+
+back1.onfocus=()=>{
+    body.style.backgroundColor='back';
 }
 
 }

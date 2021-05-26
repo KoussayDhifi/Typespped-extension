@@ -1,6 +1,7 @@
 {
     "manifest_version":2,
     "name":"TypeSpeed",
+    "options_page": "type.html",
     "version":"1.0.0",
     "description":"An extension that helps you to mesure how many words per minute you can type and how much is your accuracy",
     "browser_action":{
@@ -8,5 +9,5 @@
         "default_popup":"type.html"
 
     },
-    "permissions":["activeTab"]
+    "permissions":["activeTab","storage"]
 }
